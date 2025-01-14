@@ -2,12 +2,6 @@ import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
-// import CourseCard from "../components/Catalog/CourseCard"
-// import CourseSlider from "../components/Catalog/CourseSlider"
-// import Footer from "../components/Common/Footer"
-
-// import Course_Card from "../components/core/Catalog/Course_Card"
-// import Course_Slider from "../components/core/Catalog/Course_Slider"
 import { axiosConnector } from "../services/apiconnector"
 import { categories } from "../services/apis"
 import { getCatalogPageData } from "../services/operations/pageAndComponentDatas"
@@ -19,6 +13,7 @@ import Footer from "../components/common/Footer"
 function Catalog() {
   const { loading } = useSelector((state) => state.profile)
   const { catalogName } = useParams()
+  console.log("Catalog name - ", catalogName)
   const [active, setActive] = useState(1)
   const [catalogPageData, setCatalogPageData] = useState(null)
   const [categoryId, setCategoryId] = useState("")
@@ -27,9 +22,11 @@ function Catalog() {
     ;(async () => {
       try {
         const res = await axiosConnector("GET", categories.CATEGORIES_API)
+        console.log("CATALOG DATA RESPONSE - ", res)
         const category_id = res?.data?.data?.find(
           (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
         )?._id
+        
         
         setCategoryId(category_id)
       } catch (error) {
@@ -37,6 +34,8 @@ function Catalog() {
       }
     })()
   }, [catalogName])
+
+  console.log("Here is catagry ID - ",categoryId)
 
   // this use effect runs when we set the value of category id
   useEffect(() => {

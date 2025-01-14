@@ -36,6 +36,7 @@ const MyProfile = () => {
           onClick={() => {
             navigate("/dashboard/settings")
           }}
+          
         >
           <RiEditBoxLine />
         </IconeBtn>

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Link, useNavigate} from "react-router-dom"
+import {Link} from "react-router-dom"
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { getPasswordResetToken } from '../services/operations/authApi';
 
 const ForgotPassword = () => {
 
     const dispatch = useDispatch()
-    const nevigate = useNavigate()
+   
 
     const [emailSent, setEmailSent] = useState(false)
     const [email, setEmail] = useState("")
